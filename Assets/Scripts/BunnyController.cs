@@ -3,20 +3,23 @@ using System.Collections;
 
 public class BunnyController : MonoBehaviour {
 
-    private Rigidbody2D _body;
-
+    private Rigidbody2D body;
+    private Animator animation;
     public float force = 750f;
 
 	// Use this for initialization
 	void Start () {
-        _body = GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody2D>();
+        animation = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	    if (Input.GetButtonUp("Jump"))
         {
-            _body.AddForce(transform.up * force);
+            body.AddForce(transform.up * force);
         }
+
+        animation.SetFloat("Velocity", Mathf.Abs(body.velocity.y));
 	}
 }
